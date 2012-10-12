@@ -1,0 +1,26 @@
+new_river.asc
+
+ncols         1201
+nrows         2001
+xllcorner     279975
+yllcorner     699975
+cellsize      50
+NODATA_value  -9999
+
+new_elev.asc
+
+ncols         1201
+nrows         2001
+xllcorner     279975
+yllcorner     699975
+cellsize      50
+NODATA_value  -9999
+
+new_land.asc
+
+ncols         1201
+nrows         2001
+xllcorner     279975
+yllcorner     699975
+cellsize      50
+NODATA_value  -9999
