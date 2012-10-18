@@ -1,19 +1,16 @@
-import numpy,scipy,Image,random,pylab
+import numpy
+import scipy
+import random
+import pylab
 from scipy import ndimage
 
-def GeometricFeature(min_area = 40,max_area = 400,aspect_ratio = 1.8,agri_area_limit = 0.3):
- # agri_area_limit denote the fraction of area to be covered by agriculture
-
-
+def GeometricFeature(Landcover_arr, min_area = 40,max_area = 400,aspect_ratio = 1.8,agri_area_limit = 0.3):
+  # agri_area_limit denote the fraction of area to be covered by agriculture
   # Initially ID is assigned value zero,the first field will receive ID = 1
   ID = 0 
-
-  # Get the Landcover map
-  Landcover_arr = numpy.load("landcover.npy")
-  (x_len,y_len) = Landcover_arr.shape
-
+  (x_len, y_len) = Landcover_arr.shape
   # Allocate and initialize Suitabilty map 
-  Suitability = numpy.zeros((x_len,y_len),dtype = "float")
+  Suitability = numpy.zeros( Landcover_arr.shape, dtype = "float")
   for i in range(0,x_len):
     for j in range(0,y_len):
       if Landcover_arr[i][j] == 0: # Ignore
@@ -157,10 +154,4 @@ def GeometricFeature(min_area = 40,max_area = 400,aspect_ratio = 1.8,agri_area_l
             Covered_area = Covered_area + 1
     else:
       list_index = list_index + 1
-    #print Covered_area
-  # Display the result
-  #River = numpy.load("river_presence.npy")
-  #Mask = [River == 255]
-  #Display_fields[Mask] = (0,0,255)
-  pylab.imsave("Output/Fields",Display_fields)
-  #Image.fromarray(Display_fields).show()
+  return Display_fields

@@ -1,0 +1,10 @@
+The following python packages are required for executing the simulation tool:  
+1. pylab
+2. numpy
+3. scipy 
+4. time ( not necessary )
+5. yaml
+6. rpy
+7. pickle
+8. math
+9. random

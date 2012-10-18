@@ -1,22 +1,27 @@
-import numpy,scipy
+import numpy
+import scipy
 
 def Slope_aspect(DEM_arr):
   """
   Return the Slope and Aspect given the Digital Elevation Model
+  Assigns different code to different direction based on some logic described below
+  
+     N-W (-1, 1)        North(0,1)      N-E(1,1)
+                          |
+                          |
+     West(-1, 0)__________|___________  East(1,0)
+                          |
+                          |
+     S-W (-1,-1)        South(0,-1)      S-E(1,-1) 
+
+  Input:
+    DEM_arr: 2-D digital elevation array (2-D array of floats)
+  Output:
+   slope_arr: 2-D array holding slope at every pixel of DEM (2-D array of floats)
+   Aspect_arr: 3-D array holding aspect as described above, for every pixel in DEM 
+
   """
   (x_len,y_len) = DEM_arr.shape
-  
-  # Assigning different code to different direction
-  # based on some logic described below
-  #
-  #   N-W (-1, 1)        North(0,1)      N-E(1,1)
-  #                        |
-  #                        |
-  #   West(-1, 0)__________|___________  East(1,0)
-  #                        |
-  #                        |
-  #   S-W (-1,-1)        South(0,-1)      S-E(1,-1) 
-
   Flat       = (0,0)
   North      = (0,1)
   North_East = (1,1)
@@ -28,8 +33,8 @@ def Slope_aspect(DEM_arr):
   North_West = (-1,1)
 
   #Allocating array to hold Slope and Aspect values
-  Aspect_arr = numpy.zeros((x_len,y_len,2),dtype ="int" )
-  slope_arr = numpy.zeros((x_len,y_len),dtype ="uint16" )
+  Aspect_arr = numpy.zeros((x_len, y_len,2), dtype = "int" )
+  slope_arr = numpy.zeros((x_len, y_len), dtype = "float" )
 
   for i in range(1,x_len-1):
     for j in range(1,y_len-1): #Boundary cells have been ignored
@@ -70,10 +75,8 @@ def Slope_aspect(DEM_arr):
         Aspect_arr[i,j] = West       # West
       elif ( 292.5 <= cell < 337.5 ):
         Aspect_arr[i,j] = North_West # North-West
-
       #_____________________Slope Calculation_____________________________________    
       rise_run = numpy.sqrt((rate_change_x*rate_change_x + rate_change_y*rate_change_y)/900)
       slope_degree = 57.29*numpy.arctan(rise_run)
       slope_arr[i][j] = slope_degree
-
   return (slope_arr,Aspect_arr)

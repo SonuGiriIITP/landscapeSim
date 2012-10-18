@@ -1,0 +1,50 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module MapGeneration_pure_python</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>MapGeneration_pure_python</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/sonu/Desktop/landscapeSimLocal/landscapeSim/Aston/SourceCode1.1/MapGeneration_pure_python.py">/home/sonu/Desktop/landscapeSimLocal/landscapeSim/Aston/SourceCode1.1/MapGeneration_pure_python.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="random.html">random</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-fN"><strong>fN</strong></a>(delta, x, sigma)</dt><dd><tt>Takes&nbsp;an&nbsp;n&nbsp;length&nbsp;numpy&nbsp;np.array,&nbsp;x,&nbsp;and&nbsp;'blurs'&nbsp;the&nbsp;mean<br>
+using&nbsp;a&nbsp;Gaussian&nbsp;distrubition&nbsp;centered&nbsp;about&nbsp;0.&nbsp;The<br>
+Gaussian&nbsp;distribution&nbsp;is&nbsp;scaled&nbsp;by&nbsp;delta&nbsp;and&nbsp;has&nbsp;standard<br>
+deviation&nbsp;of&nbsp;sigma.</tt></dd></dl>
+ <dl><dt><a name="-midPointFm2d"><strong>midPointFm2d</strong></a>(max_level, sigma, H, addition, wrap, gradient, seed<font color="#909090">=0</font>, normalise<font color="#909090">=True</font>, bounds<font color="#909090">=[0, 1]</font>)</dt><dd><tt>________________________________________________________________________<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_level&nbsp;:&nbsp;Maximum&nbsp;number&nbsp;of&nbsp;recursions(&nbsp;N&nbsp;=&nbsp;2^max_level)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sigma&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Initial&nbsp;standard&nbsp;deviation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;H&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Roughness&nbsp;constant&nbsp;varies&nbsp;form&nbsp;0.0&nbsp;to&nbsp;1.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;addition&nbsp;&nbsp;:&nbsp;boolean&nbsp;parameter&nbsp;(turns&nbsp;random&nbsp;additions&nbsp;on/off)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;wrap&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;wraps&nbsp;the&nbsp;Image<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gradient&nbsp;&nbsp;:&nbsp;if&nbsp;1&nbsp;then&nbsp;corners&nbsp;are&nbsp;deterministically&nbsp;set&nbsp;else&nbsp;randomally<br>
+&nbsp;&nbsp;&nbsp;&nbsp;seed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;seed&nbsp;value&nbsp;for&nbsp;random&nbsp;number&nbsp;generator<br>
+&nbsp;&nbsp;&nbsp;&nbsp;normalise&nbsp;:&nbsp;normalizes&nbsp;the&nbsp;data&nbsp;using&nbsp;bound<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bounds&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;used&nbsp;for&nbsp;normalization&nbsp;of&nbsp;the&nbsp;grid&nbsp;data<br>
+&nbsp;<br>
+Result:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Output&nbsp;is&nbsp;given&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;an&nbsp;array(grid)&nbsp;which&nbsp;holds&nbsp;surface<br>
+&nbsp;&nbsp;&nbsp;&nbsp;elevation&nbsp;data&nbsp;for&nbsp;a&nbsp;square&nbsp;region.&nbsp;&nbsp;<br>
+_________________________________________________________________________</tt></dd></dl>
+</td></tr></table>
+</body></html>

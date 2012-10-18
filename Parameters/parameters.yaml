@@ -1,0 +1,51 @@
+#               YAML parameter file
+# H: python-list containing different H values for DEM's
+# H: [H1, H2, H3, ...]
+#
+# H_wt: weight for corresponding H-value
+# H_wt: [H1_wt, H2_wt, H3_wt, ...]
+#
+# seed: seed value for random no generator
+# seed: [seed1, seed2, seed3, ...]
+#
+# elev_range: max and min bound on elevation values
+# elev_range: [min_elev, max_elev]
+# 
+# DEMcreator_option: SS OR fm2D
+# 
+# Three_DplotDEM: y/Y or n/N (depending on weather you want to plot eroded DEM as 3-D plot) 
+# response : Depends on weather you to run Decision tree module(y for yes OR n/N for No)
+#            You should specify n/N if decision_tree.pkl file is already present in Source Code directory  
+#
+# Features related to agricultural land
+# min_area: minimum area of a filed(integer)
+# max_area: maximum area of a filed(integer)
+# aspect_ratio: ration of lenght to width (float)
+# agri_area_limit: ratio of area of agriculture to entire grid (1 < float < 1)
+#
+#NAME OF FILES IN training_data directory
+# training_data_elev: new_elev.asc
+# training_data_elev: new_land.asc
+# training_data_elev: new_rivers.asc
+#
+#
+---
+H: [0.85, 0.7, 0.6, 0.4]
+H_wt: [0.6, 0.2, 0.1, 0.1]
+seed: [19, 17, 11, 37]
+elev_range: [0, 1300]
+max_level: 9
+river_drop: 10
+counter: 1
+DEMcreator_option: fm2D
+Three_DplotDEM: n
+output_dir: Output
+response: y
+min_area: 40
+max_area: 400
+aspect_ratio: 1.8
+agri_area_limit: 0.25
+training_data_elev: new_elev.asc
+training_data_landcover: new_land.asc
+training_data_river: new_rivers.asc
+...

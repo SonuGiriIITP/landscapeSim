@@ -1,0 +1,53 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module main</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>main</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/sonu/Desktop/landscapeSimLocal/landscapeSim/Aston/SourceCode1.1/main.py">/home/sonu/Desktop/landscapeSimLocal/landscapeSim/Aston/SourceCode1.1/main.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="DecisionTree.html">DecisionTree</a><br>
+<a href="Geometry.html">Geometry</a><br>
+<a href="Hydro_Network.html">Hydro_Network</a><br>
+</td><td width="25%" valign=top><a href="VegetationClassify.html">VegetationClassify</a><br>
+<a href="scipy.ndimage.html">scipy.ndimage</a><br>
+<a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="pylab.html">pylab</a><br>
+<a href="surface_plot.html">surface_plot</a><br>
+<a href="time.html">time</a><br>
+</td><td width="25%" valign=top><a href="yaml.html">yaml</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-main"><strong>main</strong></a>()</dt><dd><tt>It&nbsp;imports&nbsp;all&nbsp;necessary&nbsp;python&nbsp;modules&nbsp;required&nbsp;for&nbsp;landscape&nbsp;simulation.<br>
+It&nbsp;then&nbsp;performs&nbsp;the&nbsp;following:<br>
+1.&nbsp;Gets&nbsp;all&nbsp;the&nbsp;parameters&nbsp;required&nbsp;for&nbsp;simulation&nbsp;from&nbsp;parameter.yaml&nbsp;file.&nbsp;<br>
+2.&nbsp;calls&nbsp;DEM_creator()&nbsp;--&gt;&nbsp;for&nbsp;generating&nbsp;DEM&nbsp;grid<br>
+3.&nbsp;Iteratively&nbsp;operate&nbsp;on&nbsp;DEM&nbsp;grid&nbsp;and&nbsp;do&nbsp;the&nbsp;following<br>
+&nbsp;&nbsp;&nbsp;3.1&nbsp;Remove&nbsp;single&nbsp;cell&nbsp;pits&nbsp;by&nbsp;calling&nbsp;Single_Cell_PitRemove()<br>
+&nbsp;&nbsp;&nbsp;3.2&nbsp;Get&nbsp;flow&nbsp;dirn&nbsp;using&nbsp;9x9&nbsp;window&nbsp;by&nbsp;calling&nbsp;Get_Flow_Dirn_using_9x9_window()&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;3.3&nbsp;Get&nbsp;flow&nbsp;dirn&nbsp;using&nbsp;3x3&nbsp;window&nbsp;by&nbsp;calling&nbsp;Flow_Dirn_3x3()&nbsp;for&nbsp;catchment&nbsp;extraction<br>
+&nbsp;&nbsp;&nbsp;3.4&nbsp;Extract&nbsp;the&nbsp;catchment&nbsp;and&nbsp;do&nbsp;depression&nbsp;filling&nbsp;using&nbsp;CatchmentExtraction()<br>
+&nbsp;&nbsp;&nbsp;3.5&nbsp;Again&nbsp;get&nbsp;flow&nbsp;direction&nbsp;using&nbsp;Get_Flow_Dirn_using_9x9_window()&nbsp;after&nbsp;depression&nbsp;filling<br>
+&nbsp;&nbsp;&nbsp;3.6&nbsp;Perfrom&nbsp;flow&nbsp;accumulation&nbsp;by&nbsp;calling&nbsp;Flow_accumulation()&nbsp;<br>
+&nbsp;&nbsp;&nbsp;3.7&nbsp;Do&nbsp;the&nbsp;erosion&nbsp;by&nbsp;calling&nbsp;Erosion()<br>
+4.&nbsp;Generate&nbsp;a&nbsp;Decision&nbsp;tree&nbsp;for&nbsp;land_cover&nbsp;allocation&nbsp;by&nbsp;calling&nbsp;DecisionTree()<br>
+5.&nbsp;Assign&nbsp;the&nbsp;vegetation&nbsp;class&nbsp;to&nbsp;DEM&nbsp;by&nbsp;calling&nbsp;VegetationClassify()<br>
+6.&nbsp;Generate&nbsp;some&nbsp;agricultural&nbsp;field&nbsp;by&nbsp;calling&nbsp;GeometricFeature()</tt></dd></dl>
+</td></tr></table>
+</body></html>

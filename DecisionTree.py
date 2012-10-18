@@ -1,35 +1,34 @@
-#import various packages needed to generate decision tree 
-import numpy,Slope_aspect,city_block_dist,time,rpy,pickle
-def DecisionTree():
-  #importing rpart from rpy
-  rpy.r.library("rpart")
+import numpy
+import Slope_aspect
+import city_block_dist
+import rpy
+import pickle
 
-  time_a = time.time()
-  print "Reading Elevation Data from ascii file"
-  Elev_arr        = numpy.loadtxt("training_data/new_elev.asc",unpack=True)
-  time_b = time.time()
-
-  print "Reading Landcover Data from ascii file" , (time_b - time_a)
-  Landcover      = numpy.loadtxt("training_data/new_land.asc",unpack=True)
-  time_b = time.time()
-
-  print "Reading River Data from ascii file" , (time_b - time_a)
-  River          = numpy.loadtxt("training_data/new_rivers.asc",unpack=True)
-  time_b = time.time()
-
-  print "Computing City block distance from River data", (time_b - time_a)
+def DecisionTree(output_dir, elev_filename, landcover_filename, river_filename):
+  """
+  This module generate decision tree used to allocate landcover classes.
+  It imports rpart library from rpy package.
+  Reads the training data, creates a sample data and use rpart libray to build decision tree. 
+  """
+  rpy.r.library("rpart") # rpart library used for creating Decision tree
+  #Read Elevation Data from ascii file
+  file_name = "training_data/%s" % (elev_filename)
+  Elev_arr = numpy.loadtxt(file_name, unpack=True)
+  #Read Landcover Data from ascii file
+  file_name = "training_data/%s" % (landcover_filename)
+  Landcover = numpy.loadtxt(file_name, unpack=True)
+  #Read River Data from ascii file
+  file_name = "training_data/%s" % (river_filename)
+  River     = numpy.loadtxt(file_name, unpack=True)
+  #Compute City block distance from River data
   River_dist_arr = city_block_dist.CityBlock(River)
-  time_b = time.time()
-
-  print "Computing Slope and Aspect from Elevation data", (time_b - time_a)
+  #Compute Slope and Aspect from Elevation data
   (Slope_arr,Aspect_arr) = Slope_aspect.Slope_aspect(Elev_arr)
-  time_b = time.time()
 
   (x_len,y_len) = Elev_arr.shape
   no_of_veg_class = 10 #no of vegetation class in Landcover matrix
-  print "Generating Lists of differnt Landcover classes", (time_b - time_a)
- 
-  #Create list of lists to hold pixels of each landcover class - no of list in 
+  #Generating Lists for differnt Landcover classes
+  # Create list of lists to hold pixels of each landcover class - no of list in 
   # list L is equal to no_of_veg_class  
   L = []
   for i in range(0,no_of_veg_class):
@@ -60,13 +59,11 @@ def DecisionTree():
       elif Landcover[i][j] == 9:
         L[9].append( ( i,j ) )
 
-  time_b = time.time()
-  print "Sampling Data for decision tree" , (time_b - time_a)
-
+  #Sample Data for decision tree
   #normalizing elevation data
-  #minimum_elev = numpy.min(Elev_arr)
-  #factor = numpy.max(Elev_arr) - minimum_elev
-  #Elev_arr = (Elev_arr[:,:]-minimum_elev)*100/factor
+  minimum_elev = numpy.min(Elev_arr)
+  factor = numpy.max(Elev_arr) - minimum_elev
+  Elev_arr = (Elev_arr[:,:]-minimum_elev)*100/factor
 
   #Create various list to hold sample training data
   Elevation = []
@@ -82,7 +79,6 @@ def DecisionTree():
       limit = len(L[i])
     else:
       limit = 500
-  
     for j in range(0,limit):
       Elevation.append( int(Elev_arr[ L[i][j][0] ][ L[i][j][1] ]))
       Slope.append(int(Slope_arr[ L[i][j][0] ][ L[i][j][1] ]))
@@ -105,7 +101,8 @@ def DecisionTree():
   fit = rpy.r.rpart(formula='Class ~ Elevation + RiverDistance + Slope + Aspect_x + Aspect_y',data=traing_data,method="class")
 
   #output a png image of the decision tree
-  rpy.r.png('Output/DecisionTree.png')
+  file_name = "%s/DecisionTree.png" % (output_dir)
+  rpy.r.png(file_name)
   rpy.r.plot(fit)
   rpy.r.text(fit)
   rpy.r.dev_off()

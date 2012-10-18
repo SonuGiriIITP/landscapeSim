@@ -1,0 +1,106 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module Hydro_Network</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>Hydro_Network</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/sonu/Desktop/landscapeSimLocal/landscapeSim/Aston/SourceCode1.1/Hydro_Network.py">/home/sonu/Desktop/landscapeSimLocal/landscapeSim/Aston/SourceCode1.1/Hydro_Network.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="MapGeneration_pure_python.html">MapGeneration_pure_python</a><br>
+<a href="SpectralSynthesisFM2D.html">SpectralSynthesisFM2D</a><br>
+</td><td width="25%" valign=top><a href="city_block_dist_erosion.html">city_block_dist_erosion</a><br>
+<a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="scipy.ndimage.html">scipy.ndimage</a><br>
+<a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="pylab.html">pylab</a><br>
+<a href="scipy.html">scipy</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-CatchmentExtraction"><strong>CatchmentExtraction</strong></a>(pit_list, DEM_arr, Flow_arr, max_posn)</dt><dd><tt>Carry&nbsp;out&nbsp;catchment&nbsp;extraction&nbsp;and&nbsp;depression&nbsp;fillings<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pit_list:&nbsp;list&nbsp;containing&nbsp;pit&nbsp;positions&nbsp;identified&nbsp;using&nbsp;3x3&nbsp;window&nbsp;(empty&nbsp;list&nbsp;[])&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DEM_arr&nbsp;:&nbsp;DEM&nbsp;array&nbsp;neede&nbsp;for&nbsp;depression&nbsp;filling&nbsp;(&nbsp;2-D&nbsp;array&nbsp;of&nbsp;floats&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Flow_arr:&nbsp;Flow&nbsp;array&nbsp;containing&nbsp;flow&nbsp;directions&nbsp;(&nbsp;2-D&nbsp;array&nbsp;of&nbsp;int&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_posn:&nbsp;position&nbsp;of&nbsp;pixel&nbsp;having&nbsp;highest&nbsp;elevation&nbsp;in&nbsp;DEM_arr&nbsp;(&nbsp;tuple&nbsp;(int,&nbsp;int)&nbsp;)<br>
+Result:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(DEM_arr,&nbsp;Found_arr,&nbsp;Catchment_boundary_arr)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DEM_arr:&nbsp;DEM_arr&nbsp;with&nbsp;some&nbsp;depressions&nbsp;filled&nbsp;(2-D&nbsp;array&nbsp;of&nbsp;flaot)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Found_arr:&nbsp;Actual&nbsp;catchment&nbsp;array&nbsp;(2-D&nbsp;arrays&nbsp;of&nbsp;ints)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Catchment_boundary_arr:&nbsp;Catchment&nbsp;boundary(inner)&nbsp;arrays(2-D&nbsp;array&nbsp;of&nbsp;ints)</tt></dd></dl>
+ <dl><dt><a name="-DEM_creator"><strong>DEM_creator</strong></a>(H, H_wt, seed, elev_range, max_level, DEMcreator_option)</dt><dd><tt>Generates&nbsp;a&nbsp;DEM&nbsp;map&nbsp;with&nbsp;specified&nbsp;parameters&nbsp;described&nbsp;below.<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;H&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;List&nbsp;containing&nbsp;H&nbsp;values&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&gt;&nbsp;[H1,&nbsp;H2,&nbsp;H3,&nbsp;...](&nbsp;List&nbsp;of&nbsp;floats&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;H_wt&nbsp;:&nbsp;List&nbsp;containing&nbsp;H_wt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&gt;&nbsp;[H1_wt,&nbsp;H2_wt,&nbsp;H3_wt,&nbsp;...]&nbsp;(&nbsp;List&nbsp;of&nbsp;floats&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;seed&nbsp;:&nbsp;seed&nbsp;for&nbsp;random&nbsp;no&nbsp;generator&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&gt;&nbsp;[seed1,&nbsp;seed2&nbsp;seed3,&nbsp;...]&nbsp;(&nbsp;list&nbsp;of&nbsp;ints)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;elev_range:&nbsp;List&nbsp;containing&nbsp;elev&nbsp;bounds&nbsp;--&gt;&nbsp;[elev_min,&nbsp;elev_max]&nbsp;(int,&nbsp;int)&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_level&nbsp;:&nbsp;size&nbsp;if&nbsp;grid&nbsp;2^(max_level)&nbsp;+&nbsp;1&nbsp;&nbsp;&nbsp;(&nbsp;int&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DEMcreator_option:&nbsp;Specify&nbsp;the&nbsp;method&nbsp;used&nbsp;to&nbsp;generate&nbsp;DEM&nbsp;(fm2D&nbsp;or&nbsp;SS)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Result:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Output&nbsp;:&nbsp;[&nbsp;DEM_arr,&nbsp;[List&nbsp;of&nbsp;DEM&nbsp;input&nbsp;grids],&nbsp;[&nbsp;List&nbsp;of&nbsp;DEM&nbsp;input&nbsp;grid&nbsp;names&nbsp;],&nbsp;[list&nbsp;of&nbsp;parameters&nbsp;for&nbsp;DEM&nbsp;input&nbsp;grid]]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where&nbsp;DEM_arr&nbsp;:Final&nbsp;Output&nbsp;DEM&nbsp;grid</tt></dd></dl>
+ <dl><dt><a name="-Erosion"><strong>Erosion</strong></a>(River_arr, DEM_arr, river_drop)</dt><dd><tt>Carry&nbsp;out&nbsp;erosion&nbsp;based&nbsp;on&nbsp;city-block&nbsp;Distance&nbsp;from&nbsp;River&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;River_arr&nbsp;:&nbsp;2-D&nbsp;array&nbsp;containing&nbsp;flow&nbsp;accumulation&nbsp;values&nbsp;(&nbsp;2-D&nbsp;array&nbsp;of&nbsp;ints&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DEM_arr&nbsp;&nbsp;&nbsp;:&nbsp;DEM&nbsp;array&nbsp;(an&nbsp;array&nbsp;of&nbsp;floats)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;river_drop:&nbsp;describes&nbsp;the&nbsp;maximum&nbsp;extent&nbsp;of&nbsp;erosion&nbsp;to&nbsp;be&nbsp;performed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;proportion&nbsp;of&nbsp;this&nbsp;value&nbsp;is&nbsp;subtracted&nbsp;from&nbsp;pixel&nbsp;depending&nbsp;on&nbsp;distance&nbsp;from&nbsp;the&nbsp;river&nbsp;(float)<br>
+Result:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DEM_arr:&nbsp;Eroded&nbsp;digital&nbsp;elevation&nbsp;model(DEM)&nbsp;array&nbsp;(&nbsp;2-D&nbsp;array&nbsp;of&nbsp;floats&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Distance_arr:&nbsp;2-D&nbsp;array&nbsp;having&nbsp;nearest&nbsp;city-block&nbsp;distance&nbsp;of&nbsp;a&nbsp;pixel&nbsp;form&nbsp;River&nbsp;(2-D&nbsp;array&nbsp;of&nbsp;int)</tt></dd></dl>
+ <dl><dt><a name="-Flow_Dirn_3x3"><strong>Flow_Dirn_3x3</strong></a>(DEM_arr, Flow_arr, pit_list)</dt><dd><tt>Carry&nbsp;out&nbsp;flow&nbsp;direction&nbsp;calculation&nbsp;on&nbsp;DEM_arr&nbsp;using&nbsp;3x3&nbsp;window.<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DEM_arr:&nbsp;Digital&nbsp;elevation&nbsp;array&nbsp;(&nbsp;2-D&nbsp;array&nbsp;of&nbsp;floats&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Flow_arr:&nbsp;2-D&nbsp;array&nbsp;of&nbsp;size&nbsp;DEM_arr&nbsp;to&nbsp;hold&nbsp;flow&nbsp;dirn&nbsp;(&nbsp;2-D&nbsp;array&nbsp;of&nbsp;ints)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pit_list:&nbsp;An&nbsp;empty&nbsp;list&nbsp;required&nbsp;to&nbsp;hold&nbsp;pits&nbsp;(&nbsp;Empty&nbsp;list&nbsp;[]&nbsp;)<br>
+Result:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pit_list:&nbsp;list&nbsp;containing&nbsp;single&nbsp;cell&nbsp;pits,&nbsp;will&nbsp;be&nbsp;used&nbsp;for&nbsp;catchment&nbsp;extraction&nbsp;(&nbsp;list&nbsp;of&nbsp;tuples&nbsp;(int,&nbsp;int)&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Flow_arr:&nbsp;2-D&nbsp;array&nbsp;containing&nbsp;flow&nbsp;direction,&nbsp;will&nbsp;be&nbsp;used&nbsp;for&nbsp;catchment&nbsp;extraction&nbsp;(2-D&nbsp;array&nbsp;of&nbsp;ints&nbsp;)</tt></dd></dl>
+ <dl><dt><a name="-Flow_accumulation"><strong>Flow_accumulation</strong></a>(Flow_dirn_arr, Flow_Accum_arr, DEM)</dt><dd><tt>Performs&nbsp;flow&nbsp;accumulation&nbsp;over&nbsp;DEM&nbsp;using&nbsp;Flow_dirn_arr&nbsp;generated&nbsp;using&nbsp;9x9&nbsp;window<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Flow_dirn_arr:&nbsp;Array&nbsp;containing&nbsp;flow&nbsp;directions,&nbsp;each&nbsp;cell&nbsp;contains&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index&nbsp;((i,j)&nbsp;values)&nbsp;of&nbsp;the&nbsp;pixel&nbsp;where&nbsp;flow&nbsp;is&nbsp;to&nbsp;be&nbsp;directed&nbsp;(2-D&nbsp;array&nbsp;of&nbsp;tuple&nbsp;of&nbsp;the&nbsp;form(int,int))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Flow_Accum_arr:&nbsp;Array&nbsp;to&nbsp;hold&nbsp;flow&nbsp;accumulation&nbsp;values&nbsp;(2-D&nbsp;array&nbsp;of&nbsp;ints)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DEM:&nbsp;Eroded&nbsp;Digital&nbsp;Elevation&nbsp;Model&nbsp;(2-D&nbsp;array&nbsp;of&nbsp;floats)<br>
+Result:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Flow_Accum_arr&nbsp;:&nbsp;Matrix&nbsp;containing&nbsp;flow&nbsp;accumulation&nbsp;values&nbsp;(2-D&nbsp;array&nbsp;of&nbsp;ints)</tt></dd></dl>
+ <dl><dt><a name="-Get_Flow_Dirn_using_9x9_window"><strong>Get_Flow_Dirn_using_9x9_window</strong></a>(DEM, Flow_dirn_arr, pit_list)</dt><dd><tt>Given&nbsp;a&nbsp;DEM&nbsp;the&nbsp;function&nbsp;returns&nbsp;the&nbsp;flow&nbsp;direction&nbsp;matrix,&nbsp;it&nbsp;also&nbsp;erodes&nbsp;the&nbsp;DEM<br>
+as&nbsp;per&nbsp;requirement&nbsp;to&nbsp;direct&nbsp;flow&nbsp;&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DEM:&nbsp;&nbsp;Digital&nbsp;Elevation&nbsp;Model&nbsp;(2-D&nbsp;array&nbsp;of&nbsp;floats)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Flow_dirn_arr:&nbsp;Empty&nbsp;flow&nbsp;direction&nbsp;array&nbsp;having&nbsp;all&nbsp;entries&nbsp;zero&nbsp;(2-D&nbsp;array&nbsp;of&nbsp;tuples&nbsp;(0,0)&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pit_list&nbsp;:Empty&nbsp;list&nbsp;used&nbsp;to&nbsp;hold&nbsp;pits&nbsp;(&nbsp;Empty&nbsp;List&nbsp;)<br>
+Result:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pit_list:&nbsp;pits&nbsp;found&nbsp;using&nbsp;9x9&nbsp;window&nbsp;(&nbsp;List&nbsp;of&nbsp;tuple&nbsp;(int,&nbsp;int)&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Flow_dirn_arr:&nbsp;2-D&nbsp;array&nbsp;containing&nbsp;Flow&nbsp;Directions&nbsp;&nbsp;(2-D&nbsp;array&nbsp;of&nbsp;tuples&nbsp;(int,&nbsp;int)&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DEM:&nbsp;Modified&nbsp;DEM&nbsp;after&nbsp;little&nbsp;erosion&nbsp;during&nbsp;flow&nbsp;direction&nbsp;assignment&nbsp;(2-D&nbsp;array&nbsp;of&nbsp;floats)</tt></dd></dl>
+ <dl><dt><a name="-Single_Cell_PitRemove"><strong>Single_Cell_PitRemove</strong></a>(originalDEM, no_of_itr)</dt><dd><tt>Removes&nbsp;single&nbsp;cell&nbsp;pits&nbsp;using&nbsp;3x3&nbsp;window<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;originalDEM:&nbsp;Digital&nbsp;Elevation&nbsp;Model&nbsp;(DEM)&nbsp;array&nbsp;(&nbsp;2-D&nbsp;array&nbsp;of&nbsp;floats&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;no_of_itr&nbsp;&nbsp;:&nbsp;No&nbsp;of&nbsp;iteration&nbsp;of&nbsp;pit&nbsp;removal&nbsp;to&nbsp;be&nbsp;performed&nbsp;(int)<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;OriginalDEM&nbsp;:Digital&nbsp;Elevation&nbsp;Model&nbsp;(DEM)&nbsp;with&nbsp;some&nbsp;pits&nbsp;removed&nbsp;using&nbsp;3x3&nbsp;window&nbsp;&nbsp;(&nbsp;2-D&nbsp;array&nbsp;of&nbsp;floats&nbsp;)</tt></dd></dl>
+ <dl><dt><a name="-pixel_exist"><strong>pixel_exist</strong></a>(p, q, x_len, y_len)</dt><dd><tt>Checks&nbsp;weather&nbsp;a&nbsp;pixel&nbsp;index&nbsp;is&nbsp;valid&nbsp;or&nbsp;not.&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;p,q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Index&nbsp;of&nbsp;the&nbsp;pixel&nbsp;to&nbsp;be&nbsp;checked&nbsp;(int,&nbsp;int)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;x_len,&nbsp;y_len&nbsp;:&nbsp;No&nbsp;of&nbsp;rows&nbsp;and&nbsp;columns&nbsp;in&nbsp;2-D&nbsp;grid&nbsp;(int,&nbsp;int)<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;True/False&nbsp;depending&nbsp;upon&nbsp;weather&nbsp;the&nbsp;3x3&nbsp;window&nbsp;centered&nbsp;at&nbsp;pixel(p,q)&nbsp;<br>
+&nbsp;&nbsp;&nbsp;lie&nbsp;within&nbsp;the&nbsp;boundary&nbsp;of&nbsp;the&nbsp;grid&nbsp;(boolean)</tt></dd></dl>
+</td></tr></table>
+</body></html>

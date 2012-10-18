@@ -1,4 +1,4 @@
-import scipy, numpy, Image
+import numpy
 from scipy import *
 
 def CityBlock(image_arr):
@@ -6,7 +6,7 @@ def CityBlock(image_arr):
   Given the image_arr it first threshold it to obtain binary array then apply 
   city block distance algorithm onto it 
   """
-  (x_len,y_len)=image_arr.shape
+  (x_len, y_len) = image_arr.shape
   
   L = []
   for i in range(0,x_len):
@@ -17,7 +17,6 @@ def CityBlock(image_arr):
   binary_arr = numpy.zeros((x_len, y_len),dtype="uint8") 
   for i in range(len(L)-1 , 97*len(L)/100,-1):
         binary_arr[ L[i][1] ][ L[i][2] ] = 255
-  binary_image=Image.fromarray(binary_arr)
 
  # Initialize distance array  
   distance_arr=zeros((x_len,y_len), dtype= "int")
@@ -33,24 +32,22 @@ def CityBlock(image_arr):
   for i in range(0, x_len):
     for j in range(0, y_len):
       if i-1 < 0 and j-1 >=0:
-        distance_arr[i][j] = min(distance_arr[i][j],1+distance_arr[i][j-1]);
+        distance_arr[i][j] = min(distance_arr[i][j],1+distance_arr[i][j-1])
       elif i-1 >= 0 and j-1 < 0:
-        distance_arr[i][j] = min(distance_arr[i][j],1+distance_arr[i-1][j]);
+        distance_arr[i][j] = min(distance_arr[i][j],1+distance_arr[i-1][j])
       elif i-1 >= 0 and j-1 >= 0:
-        distance_arr[i][j] = min(distance_arr[i][j],1+distance_arr[i-1][j], 1+distance_arr[i][j-1]);
+        distance_arr[i][j] = min(distance_arr[i][j],1+distance_arr[i-1][j], 1+distance_arr[i][j-1])
       else:
-        distance_arr[i][j]=distance_arr[i][j];
+        distance_arr[i][j]=distance_arr[i][j]
 
   for i in range(x_len-1, -1, -1):
     for j in range(y_len-1, -1, -1):
       if i+1 > x_len-1 and j+1 <=y_len-1:
-        distance_arr[i][j] = min(distance_arr[i][j],1+distance_arr[i][j+1]);
+        distance_arr[i][j] = min(distance_arr[i][j],1+distance_arr[i][j+1])
       elif i+1 <= x_len-1 and j+1 > y_len-1:
-        distance_arr[i][j] = min(distance_arr[i][j],1+distance_arr[i+1][j]);
+        distance_arr[i][j] = min(distance_arr[i][j],1+distance_arr[i+1][j])
       elif i+1 <= x_len-1 and j+1 <= y_len-1:
-        distance_arr[i][j] = min(distance_arr[i][j],1+distance_arr[i+1][j], 1+distance_arr[i][j+1]);
+        distance_arr[i][j] = min(distance_arr[i][j],1+distance_arr[i+1][j], 1+distance_arr[i][j+1])
       else:
-        distance_arr[i][j]=distance_arr[i][j];
-
-  numpy.save("river_presence.npy",binary_arr)
+        distance_arr[i][j]=distance_arr[i][j]
   return distance_arr
