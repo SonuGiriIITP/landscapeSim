@@ -22,7 +22,7 @@ def main():
        3.3 Get flow dirn using 3x3 window by calling Flow_Dirn_3x3() for catchment extraction
        3.4 Extract the catchment and do depression filling using CatchmentExtraction()
        3.5 Again get flow direction using Get_Flow_Dirn_using_9x9_window() after depression filling
-       3.6 Perfrom flow accumulation by calling Flow_accumulation() 
+       3.6 Perform flow accumulation by calling Flow_accumulation() 
        3.7 Do the erosion by calling Erosion()
     4. Generate a Decision tree for land_cover allocation by calling DecisionTree()
     5. Assign the vegetation class to DEM by calling VegetationClassify()
@@ -40,13 +40,28 @@ def main():
     river_drop = stream['river_drop']
     max_level = stream['max_level']
     DEMcreator_option = stream['DEMcreator_option']
+    north = stream['north']
+    north_west = stream['north_west']
+    west = stream['west']
+    south_west = stream['south_west']
+    south = stream['south']
+    south_east = stream['south_east']
+    east = stream['east']
+    north_east = stream['north_east']
+    center = stream['center']
     Three_DplotDEM = stream["Three_DplotDEM"]
     output_dir = stream['output_dir']
     response = stream['response']
+    elev_filename = stream["training_data_elev"]
+    landcover_filename = stream["training_data_landcover"]
+    river_filename = stream["training_data_river"]
     min_area = stream['min_area']
     max_area = stream['max_area']
     aspect_ratio = stream['aspect_ratio']
     agri_area_limit = stream['agri_area_limit']
+    next_patch_orientation_probability = stream['next_patch_orientation_probability']
+    gradient_values = [north, north_west, west, south_west, south, south_east, east, north_east, center]
+    yaml_file.close() #close the yaml parameter file
     print ("Running simulation with follwing parameters")
     print ("Counter %d" % counter)
     print ("H %s" % H)
@@ -56,20 +71,21 @@ def main():
     print ("river_drop %s" % river_drop)
     print ("max_level %s" % max_level)
     print ("DEMcreator_option %s" % DEMcreator_option)
+    print ("Gradient values %s" % gradient_values)
     print ("output_dir %s" % output_dir)
     print ("response %s" % response)
     print ("min_area %d" % min_area)
     print ("max_area %d" % max_area)
     print ("aspect_ratio %s" % aspect_ratio)
     print ("agri_area_limit %s" % agri_area_limit)
-
+ 
     #Generate DEM using FM2D/SS algorithm by calling DEM_creator(args...) function")
-    DEM_Result = Hydro_Network.DEM_creator(H, H_wt, seed, elev_range, max_level, DEMcreator_option)
+    DEM_Result = Hydro_Network.DEM_creator(H, H_wt, seed, elev_range, max_level, gradient_values, DEMcreator_option)
     #Write result to Output file
     file_name = "%s/Original_DEM" % (output_dir)
     pylab.imsave(file_name, DEM_Result[0])
     for i in range(0,len(DEM_Result[1])):
-        file_name = "%s/%s" % (output_dir,DEM_Result[2][i])#,DEM_Result[3][i][0],DEM_Result[3][i][1])
+        file_name = "%s/%s" % (output_dir,DEM_Result[2][i])#TODO(include parameter in filename)DEM_Result[3][i][0],DEM_Result[3][i][1])
         pylab.imsave(file_name, DEM_Result[1][i])
 
     DEM = DEM_Result[0]
@@ -115,10 +131,6 @@ def main():
     print ("Time taken in Erosion modeling", time2 - time1,"seconds")
 
     if (response == 'y') or (response == 'Y'):
-        elev_filename = stream["training_data_elev"]
-        landcover_filename = stream["training_data_landcover"]
-        river_filename = stream["training_data_river"]
-
         DecisionTree.DecisionTree(output_dir, elev_filename, landcover_filename, river_filename)
         time3 = time.time()
         print "Time taken to generate decision tree is " , (time3 - time2) ,"seconds"
@@ -129,12 +141,13 @@ def main():
     pylab.imsave(file_name, Veg_arr)
     time4 = time.time()
     print "Time taken to assign landcover is " , (time4 - time3),"seconds"
-    fields =Geometry.GeometricFeature(Veg_arr, min_area = min_area, max_area = max_area, aspect_ratio = aspect_ratio ,agri_area_limit = agri_area_limit)
-    file_name = "%s/Fields" % (output_dir)
-    pylab.imsave(file_name, fields)
+    (agri, labelled_fields) =Geometry.GeometricFeature(Veg_arr, min_area, max_area, aspect_ratio, agri_area_limit, next_patch_orientation_probability)
+    file_name = "%s/labelled_fields_display" % (output_dir)
+    pylab.imsave(file_name, labelled_fields)
+    file_name = "%s/Agriculture" % (output_dir)
+    pylab.imsave(file_name, agri)
     time5 = time.time()
     print "Time taken to generate Geometric Features is " ,(time5 - time4) ,"seconds"    
-    yaml_file.close()
 
 if __name__ == "__main__":
     main()

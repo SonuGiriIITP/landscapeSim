@@ -11,7 +11,7 @@ def fN(delta, x, sigma):
 
 
 def midPointFm2d(max_level, sigma, H, addition, wrap, gradient,
-                 seed=0, normalise = True, bounds = [0,1]):
+                 seed=0, normalise = True, bounds = [0,1], gradient_values = [60,20,5,25,45,55,25,60,52]):
     """
     ________________________________________________________________________
     Args:
@@ -32,15 +32,15 @@ def midPointFm2d(max_level, sigma, H, addition, wrap, gradient,
     """	
     
     random.seed(seed) #seed the random number generator 
-    north      = 60
-    north_west = 20
-    west       = 5
-    south_west = 25
-    south      = 45
-    south_east = 55
-    east       = 25
-    north_east = 60
-    center     = 52
+    north      = gradient_values[0]
+    north_west = gradient_values[1]
+    west       = gradient_values[2]
+    south_west = gradient_values[3]
+    south      = gradient_values[4]
+    south_east = gradient_values[5]
+    east       = gradient_values[6]
+    north_east = gradient_values[7]
+    center     = gradient_values[8]
 
     N = 2**max_level 
     grid = np.zeros([N+1,N+1])#Generate a 2-D real array of size (N+1)^2 initialized to zero 

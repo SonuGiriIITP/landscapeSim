@@ -20,7 +20,7 @@ def pixel_exist(p,q,x_len,y_len):
     return ( (p >= 1) and (q >= 1) and ( p <= x_len - 2) and (q <= x_len-2) )
 
 
-def DEM_creator(H, H_wt, seed, elev_range, max_level, DEMcreator_option):
+def DEM_creator(H, H_wt, seed, elev_range, max_level, gradient_values, DEMcreator_option):
     """
     Generates a DEM map with specified parameters described below.
     Args:
@@ -29,6 +29,7 @@ def DEM_creator(H, H_wt, seed, elev_range, max_level, DEMcreator_option):
         seed : seed for random no generator     --> [seed1, seed2 seed3, ...] ( list of ints)
         elev_range: List containing elev bounds --> [elev_min, elev_max] (int, int) 
         max_level : size if grid 2^(max_level) + 1   ( int )
+        gradient_values: list containing gradient values (List of float values)
         DEMcreator_option: Specify the method used to generate DEM (fm2D or SS)       
     Result:
         Output : [ DEM_arr, [List of DEM input grids], [ List of DEM input grid names ], [list of parameters for DEM input grid]]
@@ -40,7 +41,7 @@ def DEM_creator(H, H_wt, seed, elev_range, max_level, DEMcreator_option):
     if DEMcreator_option == 'fm2D':
         #Generate first DEM with gradient = 1 (i.e. TRUE) using FM2D method
         DEM_arr = MapGeneration_pure_python.midPointFm2d(max_level = max_level, sigma = 1, H = H[0], addition = True,\
-                                          wrap = False, gradient = 1, seed = seed[0], normalise=True, bounds = elev_range)
+                                          wrap = False, gradient = 1, seed = seed[0], normalise=True, bounds = elev_range, gradient_values = gradient_values)
         Input_DEMs.append(DEM_arr)
         file_name = "InputDEM_arr%d" % (1)
         name.append(file_name)
@@ -49,7 +50,7 @@ def DEM_creator(H, H_wt, seed, elev_range, max_level, DEMcreator_option):
         for i in range(1,len(H)):    
             #Generate other DEM's with gradient = 0 (i.e. FLASE) and method specified by DEMcreator_option         
             temp_arr = MapGeneration_pure_python.midPointFm2d(max_level = max_level, sigma = 1, H = H[i], addition = True,\
-                                                   wrap = False, gradient = 0, seed = seed[i], normalise = True, bounds = elev_range)
+                                         wrap = False, gradient = 0, seed = seed[i], normalise = True, bounds = elev_range, gradient_values = gradient_values)
             Input_DEMs.append(temp_arr)
             file_name = "InputDEM_arr%d" % (i+1)
             name.append(file_name)
@@ -58,7 +59,7 @@ def DEM_creator(H, H_wt, seed, elev_range, max_level, DEMcreator_option):
     else:
         #Generate first DEM with gradient = 1 (i.e. TRUE) using FM2D method
         DEM_arr = MapGeneration_pure_python.midPointFm2d(max_level = max_level, sigma = 1, H = H[0], addition = True,\
-                                          wrap = False, gradient = 1, seed = seed[0], normalise=True, bounds = elev_range)
+                                          wrap = False, gradient = 1, seed = seed[0], normalise=True, bounds = elev_range, gradient_values = gradient_values)
         DEM_arr = DEM_arr[:-1,:-1] # omit last row and last col to maintain consistency with Spectral method output grid 
         Input_DEMs.append(DEM_arr)
         file_name = "InputDEM_arr%d" % (1)
@@ -305,8 +306,10 @@ def Get_Flow_Dirn_using_9x9_window(DEM, Flow_dirn_arr , pit_list):
                 if min_y < 0:
                     sign_y = -1
                 (p, q) = (abs(min_x),abs(min_y)) 
-
-                Elev_diff = (DEM[i][j] - DEM[p*sign_x + i][q*sign_y + j])/max(p,q)
+                if p!= 0 and q!= 0:
+                    Elev_diff = (DEM[i][j] - DEM[p*sign_x + i][q*sign_y + j])/max(p,q)
+                else:
+                    Elev_diff = 0
                 # difference in elevation of the central pixel and the pixel with minimum elevation
                 # in 9x9 window, required for the purpose of erosion 
      
