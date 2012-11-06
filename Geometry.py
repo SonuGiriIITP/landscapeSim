@@ -5,7 +5,16 @@ import pylab
 from scipy import ndimage
 from scipy.ndimage import (label, find_objects)
 
-def GeometricFeature(Landcover_arr, min_area = 40,max_area = 400,aspect_ratio = 1.8,agri_area_limit = 0.3, next_patch_orientation_probability = 0.5):
+def CreatePatch(max_area, min_area, aspect_ratio):
+  # Calculate the dimension of field using area and aspect_ratio
+  # Generate a rectangle with the dimensions calculated
+  area = min_area + int( random.random()*(max_area - min_area) ) 
+  height = numpy.sqrt(area/aspect_ratio)
+  rectangle = numpy.zeros((int(height),int(aspect_ratio*height)),dtype="int")
+  return rectangle
+
+
+def GeometricFeature(Landcover_arr, Distance_arr, min_area = 40,max_area = 400,aspect_ratio = 1.8,agri_area_limit = 0.3, next_patch_orientation_probability = 0.5):
   """
   Generates geometrical features like fields
   Args:
@@ -23,7 +32,7 @@ def GeometricFeature(Landcover_arr, min_area = 40,max_area = 400,aspect_ratio = 
   Suitability = numpy.zeros( Landcover_arr.shape, dtype = "float")
   for i in range(0,x_len):
     for j in range(0,y_len):
-      if Landcover_arr[i][j] == 0: # Ignore
+      if Landcover_arr[i][j] == 0 or Distance_arr[i][j] == 0: # Ignore
         Suitability[i][j] = 0
       elif Landcover_arr[i][j] == 25:  # Deciduous woodland
         Suitability[i][j] = 0.6
@@ -59,10 +68,6 @@ def GeometricFeature(Landcover_arr, min_area = 40,max_area = 400,aspect_ratio = 
   List.sort(reverse = True)
   threshold = List[int(0.7*len(List))][0]
 
-  # Calculate the dimension of field using max_area and aspect_ratio
-  # Generate a rectangle with the dimensions calculated 
-  height = numpy.sqrt(max_area/aspect_ratio)
-  rectangle = numpy.zeros((int(height),int(aspect_ratio*height)),dtype="int")
   # list_index denote the suitability list element in consideration
   list_index = 0
   # Covered_area denote the total area covered by agriculture during program execution
@@ -75,6 +80,7 @@ def GeometricFeature(Landcover_arr, min_area = 40,max_area = 400,aspect_ratio = 
 
   while Covered_area < limit1 or list_index > len(List) - min_area:
     ID = ID + 1 # keep increasing the ID before every field placement
+    rectangle = CreatePatch(max_area, min_area, aspect_ratio)
     # Assign ID to rectangle
     rectangle[:,:] = ID
     # generate a random angle between 0 to 180

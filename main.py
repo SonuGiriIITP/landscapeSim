@@ -141,7 +141,7 @@ def main():
     pylab.imsave(file_name, Veg_arr)
     time4 = time.time()
     print "Time taken to assign landcover is " , (time4 - time3),"seconds"
-    (agri, labelled_fields) =Geometry.GeometricFeature(Veg_arr, min_area, max_area, aspect_ratio, agri_area_limit, next_patch_orientation_probability)
+    (agri, labelled_fields) =Geometry.GeometricFeature(Veg_arr,Distance_arr, min_area, max_area, aspect_ratio, agri_area_limit, next_patch_orientation_probability)
     file_name = "%s/labelled_fields_display" % (output_dir)
     pylab.imsave(file_name, labelled_fields)
     file_name = "%s/Agriculture" % (output_dir)

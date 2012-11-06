@@ -306,10 +306,10 @@ def Get_Flow_Dirn_using_9x9_window(DEM, Flow_dirn_arr , pit_list):
                 if min_y < 0:
                     sign_y = -1
                 (p, q) = (abs(min_x),abs(min_y)) 
-                if p!= 0 and q!= 0:
-                    Elev_diff = (DEM[i][j] - DEM[p*sign_x + i][q*sign_y + j])/max(p,q)
-                else:
+                if p == 0 and q == 0:
                     Elev_diff = 0
+                else:
+                    Elev_diff = (DEM[i][j] - DEM[p*sign_x + i][q*sign_y + j])/max(p,q)
                 # difference in elevation of the central pixel and the pixel with minimum elevation
                 # in 9x9 window, required for the purpose of erosion 
      
